@@ -20,32 +20,70 @@
 
 <body>
 
-    <!-- =========================
+
+    <!-- =========================================
+         NAVIGATION BAR
+    ========================================== -->
+
+    <nav class="navbar">
+
+        <div class="nav-container">
+
+            <a href="#how-it-works">
+                How It Works
+            </a>
+
+            <a href="#encryption-decryption">
+                Encryption &amp; Decryption
+            </a>
+
+            <a href="#security">
+                Security Demonstration
+            </a>
+
+            <a href="#tests">
+                Tests
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =========================================
          MAIN TITLE
-    ========================== -->
+    ========================================== -->
 
     <header class="main-header">
 
-        <h1>Vigenère Cipher</h1>
+        <h1>
+            Vigenère Cipher
+        </h1>
 
     </header>
 
 
 
-    <!-- =========================
-         ENCRYPTION + DECRYPTION
-    ========================== -->
+    <!-- =========================================
+         ENCRYPTION & DECRYPTION
+    ========================================== -->
 
-    <section class="cipher-section">
+    <section
+        id="encryption-decryption"
+        class="cipher-section page-section"
+    >
 
 
-        <!-- =====================
+        <!-- =====================================
              ENCRYPTION CARD
-        ====================== -->
+        ====================================== -->
 
         <div class="cipher-card">
 
-            <h2>Encryption</h2>
+            <h2>
+                Encryption
+            </h2>
 
 
             <label for="plaintext">
@@ -79,6 +117,7 @@
                     Encrypt
                 </button>
 
+
                 <button
                     class="outline-button"
                     onclick="clearEncryption()"
@@ -106,13 +145,19 @@
             ></p>
 
 
+            <!-- ENCRYPTION STEPS -->
+
             <div
                 id="encryptionSteps"
                 class="steps-container"
             ></div>
 
 
-            <!-- Appears after successful encryption -->
+            <!--
+                Appears only after successful encryption.
+                Sends ciphertext and key to the
+                Decryption card.
+            -->
 
             <div
                 id="encryptReverseSection"
@@ -132,13 +177,15 @@
 
 
 
-        <!-- =====================
+        <!-- =====================================
              DECRYPTION CARD
-        ====================== -->
+        ====================================== -->
 
         <div class="cipher-card">
 
-            <h2>Decryption</h2>
+            <h2>
+                Decryption
+            </h2>
 
 
             <label for="ciphertext">
@@ -172,6 +219,7 @@
                     Decrypt
                 </button>
 
+
                 <button
                     class="outline-button"
                     onclick="clearDecryption()"
@@ -199,13 +247,19 @@
             ></p>
 
 
+            <!-- DECRYPTION STEPS -->
+
             <div
                 id="decryptionSteps"
                 class="steps-container"
             ></div>
 
 
-            <!-- Appears after successful decryption -->
+            <!--
+                Appears only after successful decryption.
+                Sends plaintext and key to the
+                Encryption card.
+            -->
 
             <div
                 id="decryptReverseSection"
@@ -227,13 +281,16 @@
 
 
 
-    <!-- =========================
+    <!-- =========================================
          HOW IT WORKS
-    ========================== -->
+    ========================================== -->
 
-    <section class="information-area">
+    <section
+        id="how-it-works"
+        class="content-section page-section"
+    >
 
-        <div class="how-it-works">
+        <div class="single-content-card how-it-works">
 
             <h2>
                 How It Works
@@ -262,15 +319,24 @@
             <div class="formula">
 
                 <p>
+
                     Encryption Formula:
+
                     <br>
+
                     C = (P + K) mod 26
+
                 </p>
 
+
                 <p>
+
                     Decryption Formula:
+
                     <br>
+
                     P = (C - K + 26) mod 26
+
                 </p>
 
             </div>
@@ -284,10 +350,15 @@
             <div class="example">
 
                 <p>Plaintext: H</p>
+
                 <p>Key: E</p>
+
                 <p>H = 7 and E = 4</p>
+
                 <p>(7 + 4) mod 26 = 11</p>
+
                 <p>11 = L</p>
+
                 <p>Therefore: H + E → L</p>
 
             </div>
@@ -298,16 +369,160 @@
 
 
 
-    <!-- =========================
-         TEST CASES + SECURITY
-    ========================== -->
+    <!-- =========================================
+         SECURITY DEMONSTRATION
+    ========================================== -->
 
-    <section class="bottom-section">
+    <section
+        id="security"
+        class="content-section page-section"
+    >
+
+        <div class="single-content-card security-card">
+
+            <h2>
+                Security Demonstration: Key Reuse
+            </h2>
 
 
-        <!-- ENCRYPTION TESTS -->
+            <p class="security-description">
 
-        <div class="test-card">
+                Reusing the same key for different messages can
+                reveal patterns and weaken the security of the
+                Vigenère Cipher.
+
+            </p>
+
+
+            <!-- MESSAGE 1 -->
+
+            <label for="message1">
+                MESSAGE 1
+            </label>
+
+            <input
+                type="text"
+                id="message1"
+                placeholder="Enter plaintext here"
+            >
+
+
+            <!-- MESSAGE 2 -->
+
+            <label for="message2">
+                MESSAGE 2
+            </label>
+
+            <input
+                type="text"
+                id="message2"
+                placeholder="Enter plaintext here"
+            >
+
+
+            <!-- KEY -->
+
+            <label for="reuseKey">
+                KEY
+            </label>
+
+            <input
+                type="text"
+                id="reuseKey"
+                placeholder="Enter key (letters only)"
+            >
+
+
+            <!-- DEMONSTRATE + CLEAR -->
+
+            <div class="button-row security-button-row">
+
+                <button
+                    class="primary-button"
+                    onclick="demonstrateKeyReuse()"
+                >
+                    Demonstrate Key Reuse
+                </button>
+
+
+                <button
+                    class="outline-button"
+                    onclick="clearKeyReuse()"
+                >
+                    Clear
+                </button>
+
+            </div>
+
+
+            <p
+                id="reuseError"
+                class="error-message"
+            ></p>
+
+
+
+            <!-- =================================
+                 KEY REUSE RESULTS
+            ================================== -->
+
+            <div class="security-results">
+
+                <h2>
+                    Key Reuse Results
+                </h2>
+
+
+                <label for="reuseCipher1">
+                    CIPHERTEXT 1
+                </label>
+
+                <textarea
+                    id="reuseCipher1"
+                    placeholder="Ciphertext will appear here"
+                    readonly
+                ></textarea>
+
+
+                <label for="reuseCipher2">
+                    CIPHERTEXT 2
+                </label>
+
+                <textarea
+                    id="reuseCipher2"
+                    placeholder="Ciphertext will appear here"
+                    readonly
+                ></textarea>
+
+
+                <div
+                    id="reuseExplanation"
+                    class="reuse-explanation"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================
+         TESTS
+    ========================================== -->
+
+    <section
+        id="tests"
+        class="content-section tests-section page-section"
+    >
+
+
+        <!-- =====================================
+             ENCRYPTION TEST CASES
+        ====================================== -->
+
+        <div class="single-content-card test-card">
 
             <h2>
                 Encryption Test Cases
@@ -319,9 +534,11 @@
 
 
 
-        <!-- DECRYPTION TESTS -->
+        <!-- =====================================
+             DECRYPTION TEST CASES
+        ====================================== -->
 
-        <div class="test-card">
+        <div class="single-content-card test-card">
 
             <h2>
                 Decryption Test Cases
@@ -331,129 +548,16 @@
 
         </div>
 
-
-
-        <!-- SECURITY DEMONSTRATION -->
-
-<div class="security-card">
-
-    <h2>
-        Security Demonstration: Key Reuse
-    </h2>
-
-
-    <p class="security-description">
-
-        Reusing the same key for different messages can
-        reveal patterns and weaken the security of the
-        Vigenère Cipher.
-
-    </p>
-
-
-    <label for="message1">
-        MESSAGE 1
-    </label>
-
-    <input
-        type="text"
-        id="message1"
-        placeholder="Enter plaintext here"
-    >
-
-
-    <label for="message2">
-        MESSAGE 2
-    </label>
-
-    <input
-        type="text"
-        id="message2"
-        placeholder="Enter plaintext here"
-    >
-
-
-    <label for="reuseKey">
-        KEY
-    </label>
-
-    <input
-        type="text"
-        id="reuseKey"
-        placeholder="Enter key (letters only)"
-    >
-
-
-    <div class="button-row">
-
-    <button
-        class="primary-button security-button"
-        onclick="demonstrateKeyReuse()"
-    >
-        Demonstrate Key Reuse
-    </button>
-
-    <button
-        class="outline-button"
-        onclick="clearKeyReuse()"
-    >
-        Clear
-    </button>
-
-</div>
-
-
-    <p
-        id="reuseError"
-        class="error-message"
-    ></p>
-
-
-    <!-- KEY REUSE RESULTS INSIDE SAME BOX -->
-
-    <div class="security-results">
-
-        <h2>
-            Key Reuse Results
-        </h2>
-
-
-        <label for="reuseCipher1">
-            CIPHERTEXT 1
-        </label>
-
-        <textarea
-            id="reuseCipher1"
-            placeholder="Ciphertext will appear here"
-            readonly
-        ></textarea>
-
-
-        <label for="reuseCipher2">
-            CIPHERTEXT 2
-        </label>
-
-        <textarea
-            id="reuseCipher2"
-            placeholder="Ciphertext will appear here"
-            readonly
-        ></textarea>
-
-
-        <div
-            id="reuseExplanation"
-            class="reuse-explanation"
-        ></div>
-
-    </div>
-
-</div>
-
     </section>
 
 
 
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
     <script src="script.js"></script>
+
 
 </body>
 
