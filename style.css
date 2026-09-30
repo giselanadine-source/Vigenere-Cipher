@@ -1,0 +1,791 @@
+/* ==========================================
+   GENERAL
+========================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: #2e63da;
+
+    background-color: #ffffff;
+}
+
+
+button,
+input,
+textarea {
+    font-family: inherit;
+}
+
+
+
+/* ==========================================
+   MAIN HEADER
+========================================== */
+
+.main-header {
+    text-align: center;
+
+    padding-top: 65px;
+
+    padding-bottom: 25px;
+}
+
+
+.main-header h1 {
+    margin: 0;
+
+    font-size: 80px;
+
+    font-weight: 700;
+
+    color: #3264d8;
+}
+
+
+
+/* ==========================================
+   ENCRYPTION + DECRYPTION AREA
+========================================== */
+
+.cipher-section {
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 38px;
+
+    padding:
+        10px
+        40px
+        30px;
+}
+
+
+.cipher-card {
+    width: 495px;
+
+    background-color: #c2d2f7;
+
+    border:
+        1.5px
+        solid
+        #3670ff;
+
+    border-radius: 11px;
+
+    padding: 10px;
+}
+
+
+.cipher-card h2 {
+    margin:
+        0
+        0
+        20px;
+
+    font-size: 22px;
+
+    font-weight: 600;
+}
+
+
+
+/* ==========================================
+   LABELS
+========================================== */
+
+label {
+    display: block;
+
+    margin-top: 12px;
+
+    margin-bottom: 5px;
+
+    font-size: 12px;
+
+    font-weight: 500;
+}
+
+
+
+/* ==========================================
+   INPUTS + TEXTAREAS
+========================================== */
+
+input,
+textarea {
+    width: 100%;
+
+    border:
+        1.5px
+        solid
+        #3670ff;
+
+    border-radius: 12px;
+
+    background-color: #ffffff;
+
+    color: #3264d8;
+
+    outline: none;
+
+    font-size: 16px;
+}
+
+
+input {
+    height: 48px;
+
+    padding:
+        0
+        16px;
+}
+
+
+textarea {
+    height: 106px;
+
+    padding:
+        14px
+        16px;
+
+    resize: none;
+}
+
+
+input::placeholder,
+textarea::placeholder {
+    color: #4776e6;
+
+    opacity: 1;
+}
+
+
+input:focus,
+textarea:focus {
+    border-width: 2px;
+}
+
+
+
+/* ==========================================
+   BUTTONS
+========================================== */
+
+.button-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-top: 20px;
+
+    margin-bottom: 20px;
+}
+
+
+button {
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.primary-button {
+    border: none;
+
+    background-color: #4176f3;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    padding:
+        12px
+        40px;
+
+    border-radius: 30px;
+}
+
+
+.primary-button:hover {
+    background-color: #2f63dd;
+
+    transform: translateY(-1px);
+}
+
+
+.outline-button {
+    background-color: transparent;
+
+    color: #3970ed;
+
+    border:
+        1.5px
+        solid
+        #3970ed;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    padding:
+        11px
+        48px;
+
+    border-radius: 30px;
+}
+
+
+.outline-button:hover {
+    background-color:
+        rgba(
+            255,
+            255,
+            255,
+            0.4
+        );
+}
+
+
+
+/* ==========================================
+   ERROR MESSAGES
+========================================== */
+
+.error-message {
+    color: #c62828;
+
+    font-size: 13px;
+
+    margin:
+        8px
+        0
+        0;
+
+    font-weight: 600;
+}
+
+
+
+/* ==========================================
+   HIDDEN / REVERSE BUTTON SECTION
+========================================== */
+
+.hidden-section {
+    display: none;
+}
+
+
+.reverse-button {
+    width: 100%;
+
+    margin-top: 20px;
+
+    margin-bottom: 5px;
+}
+
+
+
+/* ==========================================
+   ALGORITHM STEP VISUALIZATION
+========================================== */
+
+.steps-container {
+    margin-top: 18px;
+
+    overflow-x: auto;
+}
+
+
+.step-title {
+    margin-bottom: 10px;
+
+    font-size: 17px;
+}
+
+
+.step-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    background-color: white;
+
+    font-size: 12px;
+}
+
+
+.step-table th,
+.step-table td {
+    border:
+        1px
+        solid
+        #4176f3;
+
+    padding: 7px;
+
+    text-align: center;
+}
+
+
+.step-table th {
+    background-color: #e9efff;
+}
+
+
+
+/* ==========================================
+   BLUE LOWER BACKGROUND AREA
+========================================== */
+
+.information-area {
+    margin-top: 10px;
+
+    background-color: #c2d2f7;
+
+    border-top:
+        1.5px
+        solid
+        #3970ed;
+
+    padding:
+        30px
+        40px
+        15px;
+}
+
+
+
+/* ==========================================
+   HOW IT WORKS
+
+   Now takes its own row.
+========================================== */
+
+.how-it-works {
+    width: 75%;
+
+    max-width: 900px;
+
+    margin:
+        0
+        auto;
+
+    background-color: white;
+
+    border:
+        1.5px
+        solid
+        #3970ed;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+
+.how-it-works h2 {
+    margin:
+        0
+        0
+        18px;
+
+    font-size: 21px;
+}
+
+
+.how-it-works p {
+    text-align: center;
+
+    margin: 5px;
+
+    line-height: 1.3;
+}
+
+
+.important-text {
+    font-weight: bold;
+
+    text-align: left !important;
+
+    margin-bottom: 18px !important;
+}
+
+
+.formula {
+    margin-top: 18px;
+
+    margin-bottom: 18px;
+}
+
+
+.formula p {
+    margin-bottom: 16px;
+}
+
+
+.example-title {
+    margin-top: 20px !important;
+}
+
+
+.example {
+    text-align: center;
+}
+
+
+
+/* ==========================================
+   BOTTOM SECTION
+
+   IMPORTANT CHANGE:
+   All boxes are stacked vertically.
+========================================== */
+
+.bottom-section {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 20px;
+
+    background-color: #c2d2f7;
+
+    padding:
+        5px
+        40px
+        40px;
+
+    border-bottom:
+        1.5px
+        solid
+        #3970ed;
+}
+
+
+
+/* ==========================================
+   TEST CARDS + SECURITY CARD
+
+   All use same width so they line up.
+========================================== */
+
+.test-card,
+.security-card {
+    width: 75%;
+
+    max-width: 900px;
+
+    background-color: white;
+
+    border:
+        1.5px
+        solid
+        #3970ed;
+
+    border-radius: 10px;
+
+    padding: 20px;
+}
+
+
+.test-card h2,
+.security-card h2 {
+    margin:
+        0
+        0
+        18px;
+
+    font-size: 21px;
+}
+
+
+
+/* ==========================================
+   TEST CASES
+========================================== */
+
+.test-case {
+    margin-bottom: 18px;
+}
+
+
+.test-case-title {
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 6px;
+}
+
+
+.test-content {
+    border:
+        1.5px
+        solid
+        #3970ed;
+
+    border-radius: 10px;
+
+    padding:
+        12px
+        16px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+
+    background-color: #ffffff;
+}
+
+
+.test-content p {
+    margin:
+        2px
+        0;
+}
+
+
+.pass {
+    color: #15803d;
+
+    font-weight: bold;
+}
+
+
+.fail {
+    color: #c62828;
+
+    font-weight: bold;
+}
+
+
+
+/* ==========================================
+   SECURITY DEMONSTRATION
+========================================== */
+
+.security-description {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    line-height: 1.5;
+
+    margin-bottom: 20px;
+}
+
+
+.security-card input {
+    height: 46px;
+}
+
+
+.security-button {
+    margin-top: 0;
+
+    padding-left: 20px;
+
+    padding-right: 20px;
+}
+
+
+
+/* ==========================================
+   KEY REUSE RESULTS
+
+   This is now INSIDE the security-card,
+   rather than its own separate box.
+========================================== */
+
+.security-results {
+    margin-top: 30px;
+
+    padding-top: 25px;
+
+    border-top:
+        1.5px
+        solid
+        #3970ed;
+}
+
+
+.security-results h2 {
+    margin-bottom: 18px;
+}
+
+
+.security-results textarea {
+    height: 100px;
+
+    margin-bottom: 10px;
+}
+
+
+.reuse-explanation {
+    margin-top: 18px;
+
+    padding: 16px;
+
+    background-color: #eef3ff;
+
+    border:
+        1px
+        solid
+        #b9ccfa;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+
+/* ==========================================
+   RESPONSIVE - TABLET
+========================================== */
+
+@media (max-width: 1000px) {
+
+    .how-it-works,
+    .test-card,
+    .security-card {
+        width: 85%;
+    }
+
+}
+
+
+
+/* ==========================================
+   RESPONSIVE - SMALLER SCREENS
+========================================== */
+
+@media (max-width: 900px) {
+
+    .main-header h1 {
+        font-size: 55px;
+    }
+
+
+    .cipher-section {
+        flex-direction: column;
+
+        align-items: center;
+    }
+
+
+    .cipher-card {
+        width: 90%;
+    }
+
+
+    .how-it-works,
+    .test-card,
+    .security-card {
+        width: 90%;
+    }
+
+
+    .information-area {
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+
+    .bottom-section {
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+}
+
+
+
+/* ==========================================
+   RESPONSIVE - MOBILE
+========================================== */
+
+@media (max-width: 500px) {
+
+    .main-header {
+        padding-top: 30px;
+    }
+
+
+    .main-header h1 {
+        font-size: 40px;
+    }
+
+
+    .cipher-section {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+
+    .cipher-card {
+        width: 100%;
+    }
+
+
+    .how-it-works,
+    .test-card,
+    .security-card {
+        width: 100%;
+    }
+
+
+    .button-row {
+        gap: 10px;
+    }
+
+
+    .primary-button,
+    .outline-button {
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+
+    .information-area {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+
+    .bottom-section {
+        padding-left: 15px;
+
+        padding-right: 15px;
+    }
+
+}
