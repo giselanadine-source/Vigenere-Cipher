@@ -1,25 +1,43 @@
-/* ========================================
+/* =========================================
    LETTER / NUMBER CONVERSION
-======================================== */
+========================================= */
+
+
+/*
+    A = 0
+    B = 1
+    C = 2
+    ...
+    Z = 25
+*/
 
 function letterToNumber(letter) {
 
-    return letter.toUpperCase().charCodeAt(0) - 65;
+    return letter
+        .toUpperCase()
+        .charCodeAt(0) - 65;
 
 }
 
 
 function numberToLetter(number) {
 
-    return String.fromCharCode(number + 65);
+    return String.fromCharCode(
+        number + 65
+    );
 
 }
 
 
 
-/* ========================================
-   VALIDATION
-======================================== */
+/* =========================================
+   INPUT VALIDATION
+========================================= */
+
+
+/*
+    The key may only contain letters.
+*/
 
 function isValidKey(key) {
 
@@ -27,6 +45,11 @@ function isValidKey(key) {
 
 }
 
+
+/*
+    Check whether a message contains
+    at least one letter.
+*/
 
 function containsLetters(message) {
 
@@ -36,40 +59,84 @@ function containsLetters(message) {
 
 
 
-/* ========================================
+/* =========================================
    VIGENERE ENCRYPTION
-======================================== */
+========================================= */
 
-function vigenereEncrypt(plaintext, key) {
+function vigenereEncrypt(
+    plaintext,
+    key
+) {
 
-    plaintext = plaintext.toUpperCase();
-    key = key.toUpperCase();
+    plaintext =
+        plaintext.toUpperCase();
+
+    key =
+        key.toUpperCase();
+
 
     let ciphertext = "";
+
     let keyIndex = 0;
 
 
-    for (let i = 0; i < plaintext.length; i++) {
+    for (
+        let i = 0;
+        i < plaintext.length;
+        i++
+    ) {
 
-        const character = plaintext[i];
+        const character =
+            plaintext[i];
 
+
+        /*
+            Encrypt alphabetic characters.
+
+            Spaces and punctuation
+            stay unchanged.
+        */
 
         if (/[A-Z]/.test(character)) {
 
             const plaintextValue =
-                letterToNumber(character);
+                letterToNumber(
+                    character
+                );
+
 
             const keyLetter =
-                key[keyIndex % key.length];
+                key[
+                    keyIndex
+                    %
+                    key.length
+                ];
+
 
             const keyValue =
-                letterToNumber(keyLetter);
+                letterToNumber(
+                    keyLetter
+                );
+
+
+            /*
+                C = (P + K) mod 26
+            */
 
             const encryptedValue =
-                (plaintextValue + keyValue) % 26;
+                (
+                    plaintextValue
+                    +
+                    keyValue
+                )
+                % 26;
+
 
             ciphertext +=
-                numberToLetter(encryptedValue);
+                numberToLetter(
+                    encryptedValue
+                );
+
 
             keyIndex++;
 
@@ -77,7 +144,8 @@ function vigenereEncrypt(plaintext, key) {
 
         else {
 
-            ciphertext += character;
+            ciphertext +=
+                character;
 
         }
 
@@ -90,40 +158,79 @@ function vigenereEncrypt(plaintext, key) {
 
 
 
-/* ========================================
+/* =========================================
    VIGENERE DECRYPTION
-======================================== */
+========================================= */
 
-function vigenereDecrypt(ciphertext, key) {
+function vigenereDecrypt(
+    ciphertext,
+    key
+) {
 
-    ciphertext = ciphertext.toUpperCase();
-    key = key.toUpperCase();
+    ciphertext =
+        ciphertext.toUpperCase();
+
+    key =
+        key.toUpperCase();
+
 
     let plaintext = "";
+
     let keyIndex = 0;
 
 
-    for (let i = 0; i < ciphertext.length; i++) {
+    for (
+        let i = 0;
+        i < ciphertext.length;
+        i++
+    ) {
 
-        const character = ciphertext[i];
+        const character =
+            ciphertext[i];
 
 
         if (/[A-Z]/.test(character)) {
 
             const cipherValue =
-                letterToNumber(character);
+                letterToNumber(
+                    character
+                );
+
 
             const keyLetter =
-                key[keyIndex % key.length];
+                key[
+                    keyIndex
+                    %
+                    key.length
+                ];
+
 
             const keyValue =
-                letterToNumber(keyLetter);
+                letterToNumber(
+                    keyLetter
+                );
+
+
+            /*
+                P = (C - K + 26) mod 26
+            */
 
             const decryptedValue =
-                (cipherValue - keyValue + 26) % 26;
+                (
+                    cipherValue
+                    -
+                    keyValue
+                    +
+                    26
+                )
+                % 26;
+
 
             plaintext +=
-                numberToLetter(decryptedValue);
+                numberToLetter(
+                    decryptedValue
+                );
+
 
             keyIndex++;
 
@@ -131,7 +238,8 @@ function vigenereDecrypt(ciphertext, key) {
 
         else {
 
-            plaintext += character;
+            plaintext +=
+                character;
 
         }
 
@@ -144,45 +252,80 @@ function vigenereDecrypt(ciphertext, key) {
 
 
 
-/* ========================================
+/* =========================================
    MAIN ENCRYPTION
-======================================== */
+========================================= */
 
 function encryptMessage() {
 
     const plaintext =
-        document.getElementById("plaintext").value.trim();
+        document
+            .getElementById(
+                "plaintext"
+            )
+            .value
+            .trim();
+
 
     const key =
-        document.getElementById("encryptKey").value.trim();
+        document
+            .getElementById(
+                "encryptKey"
+            )
+            .value
+            .trim();
+
 
     const error =
-        document.getElementById("encryptError");
+        document
+            .getElementById(
+                "encryptError"
+            );
+
 
     const output =
-        document.getElementById("ciphertextOutput");
+        document
+            .getElementById(
+                "ciphertextOutput"
+            );
+
 
     const steps =
-        document.getElementById("encryptionSteps");
+        document
+            .getElementById(
+                "encryptionSteps"
+            );
+
 
     const reverseSection =
-        document.getElementById("encryptReverseSection");
+        document
+            .getElementById(
+                "encryptReverseSection"
+            );
+
 
 
     /*
-        Keep the user's input.
+        Do not remove the user's
+        plaintext or key.
 
         Only clear the previous result.
     */
 
     error.textContent = "";
+
     output.value = "";
+
     steps.innerHTML = "";
 
-    reverseSection.style.display = "none";
+    reverseSection.style.display =
+        "none";
 
 
-    /* Validation */
+
+    /* =====================================
+       VALIDATION
+    ====================================== */
 
     if (plaintext === "") {
 
@@ -224,7 +367,10 @@ function encryptMessage() {
     }
 
 
-    /* Encrypt */
+
+    /* =====================================
+       ENCRYPT
+    ====================================== */
 
     const ciphertext =
         vigenereEncrypt(
@@ -233,10 +379,14 @@ function encryptMessage() {
         );
 
 
-    output.value = ciphertext;
+    output.value =
+        ciphertext;
 
 
-    /* Show algorithm steps */
+
+    /* =====================================
+       DISPLAY STEPS
+    ====================================== */
 
     displayEncryptionSteps(
         plaintext,
@@ -245,56 +395,91 @@ function encryptMessage() {
     );
 
 
+
     /*
-        Show the button that sends
-        this result to the Decryption card.
+        Show the Decrypt button.
     */
 
-    reverseSection.style.display = "block";
+    reverseSection.style.display =
+        "block";
 
 }
 
 
 
-/* ========================================
+/* =========================================
    MAIN DECRYPTION
-======================================== */
+========================================= */
 
 function decryptMessage() {
 
     const ciphertext =
-        document.getElementById("ciphertext").value.trim();
+        document
+            .getElementById(
+                "ciphertext"
+            )
+            .value
+            .trim();
+
 
     const key =
-        document.getElementById("decryptKey").value.trim();
+        document
+            .getElementById(
+                "decryptKey"
+            )
+            .value
+            .trim();
+
 
     const error =
-        document.getElementById("decryptError");
+        document
+            .getElementById(
+                "decryptError"
+            );
+
 
     const output =
-        document.getElementById("plaintextOutput");
+        document
+            .getElementById(
+                "plaintextOutput"
+            );
+
 
     const steps =
-        document.getElementById("decryptionSteps");
+        document
+            .getElementById(
+                "decryptionSteps"
+            );
+
 
     const reverseSection =
-        document.getElementById("decryptReverseSection");
+        document
+            .getElementById(
+                "decryptReverseSection"
+            );
+
 
 
     /*
-        Keep user input.
+        Keep the ciphertext and key.
 
-        Clear only previous result.
+        Only clear previous output.
     */
 
     error.textContent = "";
+
     output.value = "";
+
     steps.innerHTML = "";
 
-    reverseSection.style.display = "none";
+    reverseSection.style.display =
+        "none";
 
 
-    /* Validation */
+
+    /* =====================================
+       VALIDATION
+    ====================================== */
 
     if (ciphertext === "") {
 
@@ -336,7 +521,10 @@ function decryptMessage() {
     }
 
 
-    /* Decrypt */
+
+    /* =====================================
+       DECRYPT
+    ====================================== */
 
     const plaintext =
         vigenereDecrypt(
@@ -345,10 +533,14 @@ function decryptMessage() {
         );
 
 
-    output.value = plaintext;
+    output.value =
+        plaintext;
 
 
-    /* Show algorithm steps */
+
+    /* =====================================
+       DISPLAY STEPS
+    ====================================== */
 
     displayDecryptionSteps(
         ciphertext,
@@ -357,29 +549,41 @@ function decryptMessage() {
     );
 
 
+
     /*
-        Show button that sends result
-        back to Encryption card.
+        Show Encrypt button.
     */
 
-    reverseSection.style.display = "block";
+    reverseSection.style.display =
+        "block";
 
 }
 
 
 
-/* ========================================
+/* =========================================
    SEND ENCRYPTION RESULT TO
    DECRYPTION CARD
-======================================== */
+========================================= */
 
 function sendToDecryption() {
 
     const ciphertext =
-        document.getElementById("ciphertextOutput").value.trim();
+        document
+            .getElementById(
+                "ciphertextOutput"
+            )
+            .value
+            .trim();
+
 
     const key =
-        document.getElementById("encryptKey").value.trim();
+        document
+            .getElementById(
+                "encryptKey"
+            )
+            .value
+            .trim();
 
 
     if (ciphertext === "") {
@@ -390,18 +594,28 @@ function sendToDecryption() {
 
 
     /*
-        Copy result into the card beside it.
+        Copy ciphertext and key
+        to the Decryption card.
     */
 
-    document.getElementById("ciphertext").value =
+    document
+        .getElementById(
+            "ciphertext"
+        )
+        .value =
         ciphertext;
 
-    document.getElementById("decryptKey").value =
+
+    document
+        .getElementById(
+            "decryptKey"
+        )
+        .value =
         key;
 
 
     /*
-        Automatically decrypt it.
+        Automatically decrypt.
     */
 
     decryptMessage();
@@ -410,18 +624,29 @@ function sendToDecryption() {
 
 
 
-/* ========================================
+/* =========================================
    SEND DECRYPTION RESULT TO
    ENCRYPTION CARD
-======================================== */
+========================================= */
 
 function sendToEncryption() {
 
     const plaintext =
-        document.getElementById("plaintextOutput").value.trim();
+        document
+            .getElementById(
+                "plaintextOutput"
+            )
+            .value
+            .trim();
+
 
     const key =
-        document.getElementById("decryptKey").value.trim();
+        document
+            .getElementById(
+                "decryptKey"
+            )
+            .value
+            .trim();
 
 
     if (plaintext === "") {
@@ -432,18 +657,28 @@ function sendToEncryption() {
 
 
     /*
-        Copy result into Encryption card.
+        Copy plaintext and key
+        to Encryption card.
     */
 
-    document.getElementById("plaintext").value =
+    document
+        .getElementById(
+            "plaintext"
+        )
+        .value =
         plaintext;
 
-    document.getElementById("encryptKey").value =
+
+    document
+        .getElementById(
+            "encryptKey"
+        )
+        .value =
         key;
 
 
     /*
-        Automatically encrypt it.
+        Automatically encrypt.
     */
 
     encryptMessage();
@@ -452,9 +687,9 @@ function sendToEncryption() {
 
 
 
-/* ========================================
+/* =========================================
    ENCRYPTION STEP VISUALIZATION
-======================================== */
+========================================= */
 
 function displayEncryptionSteps(
     plaintext,
@@ -462,8 +697,11 @@ function displayEncryptionSteps(
     container
 ) {
 
-    plaintext = plaintext.toUpperCase();
-    key = key.toUpperCase();
+    plaintext =
+        plaintext.toUpperCase();
+
+    key =
+        key.toUpperCase();
 
 
     let table = `
@@ -475,12 +713,31 @@ function displayEncryptionSteps(
         <table class="step-table">
 
             <tr>
-                <th>Letter</th>
-                <th>P</th>
-                <th>Key</th>
-                <th>K</th>
-                <th>Calculation</th>
-                <th>Result</th>
+
+                <th>
+                    Letter
+                </th>
+
+                <th>
+                    P
+                </th>
+
+                <th>
+                    Key
+                </th>
+
+                <th>
+                    K
+                </th>
+
+                <th>
+                    Calculation
+                </th>
+
+                <th>
+                    Result
+                </th>
+
             </tr>
 
     `;
@@ -489,13 +746,21 @@ function displayEncryptionSteps(
     let keyIndex = 0;
 
 
-    for (let i = 0; i < plaintext.length; i++) {
+    for (
+        let i = 0;
+        i < plaintext.length;
+        i++
+    ) {
 
         const character =
             plaintext[i];
 
 
-        if (!/[A-Z]/.test(character)) {
+        if (
+            !/[A-Z]/.test(
+                character
+            )
+        ) {
 
             continue;
 
@@ -503,38 +768,67 @@ function displayEncryptionSteps(
 
 
         const p =
-            letterToNumber(character);
+            letterToNumber(
+                character
+            );
+
 
         const keyLetter =
-            key[keyIndex % key.length];
+            key[
+                keyIndex
+                %
+                key.length
+            ];
+
 
         const k =
-            letterToNumber(keyLetter);
+            letterToNumber(
+                keyLetter
+            );
+
 
         const result =
-            (p + k) % 26;
+            (
+                p
+                +
+                k
+            )
+            % 26;
+
 
         const resultLetter =
-            numberToLetter(result);
+            numberToLetter(
+                result
+            );
 
 
         table += `
 
             <tr>
 
-                <td>${character}</td>
+                <td>
+                    ${character}
+                </td>
 
-                <td>${p}</td>
+                <td>
+                    ${p}
+                </td>
 
-                <td>${keyLetter}</td>
+                <td>
+                    ${keyLetter}
+                </td>
 
-                <td>${k}</td>
+                <td>
+                    ${k}
+                </td>
 
                 <td>
                     (${p} + ${k}) mod 26 = ${result}
                 </td>
 
-                <td>${resultLetter}</td>
+                <td>
+                    ${resultLetter}
+                </td>
 
             </tr>
 
@@ -546,18 +840,23 @@ function displayEncryptionSteps(
     }
 
 
-    table += "</table>";
+    table += `
+
+        </table>
+
+    `;
 
 
-    container.innerHTML = table;
+    container.innerHTML =
+        table;
 
 }
 
 
 
-/* ========================================
+/* =========================================
    DECRYPTION STEP VISUALIZATION
-======================================== */
+========================================= */
 
 function displayDecryptionSteps(
     ciphertext,
@@ -565,8 +864,11 @@ function displayDecryptionSteps(
     container
 ) {
 
-    ciphertext = ciphertext.toUpperCase();
-    key = key.toUpperCase();
+    ciphertext =
+        ciphertext.toUpperCase();
+
+    key =
+        key.toUpperCase();
 
 
     let table = `
@@ -578,12 +880,31 @@ function displayDecryptionSteps(
         <table class="step-table">
 
             <tr>
-                <th>Letter</th>
-                <th>C</th>
-                <th>Key</th>
-                <th>K</th>
-                <th>Calculation</th>
-                <th>Result</th>
+
+                <th>
+                    Letter
+                </th>
+
+                <th>
+                    C
+                </th>
+
+                <th>
+                    Key
+                </th>
+
+                <th>
+                    K
+                </th>
+
+                <th>
+                    Calculation
+                </th>
+
+                <th>
+                    Result
+                </th>
+
             </tr>
 
     `;
@@ -592,13 +913,21 @@ function displayDecryptionSteps(
     let keyIndex = 0;
 
 
-    for (let i = 0; i < ciphertext.length; i++) {
+    for (
+        let i = 0;
+        i < ciphertext.length;
+        i++
+    ) {
 
         const character =
             ciphertext[i];
 
 
-        if (!/[A-Z]/.test(character)) {
+        if (
+            !/[A-Z]/.test(
+                character
+            )
+        ) {
 
             continue;
 
@@ -606,39 +935,70 @@ function displayDecryptionSteps(
 
 
         const c =
-            letterToNumber(character);
+            letterToNumber(
+                character
+            );
+
 
         const keyLetter =
-            key[keyIndex % key.length];
+            key[
+                keyIndex
+                %
+                key.length
+            ];
+
 
         const k =
-            letterToNumber(keyLetter);
+            letterToNumber(
+                keyLetter
+            );
+
 
         const result =
-            (c - k + 26) % 26;
+            (
+                c
+                -
+                k
+                +
+                26
+            )
+            % 26;
+
 
         const resultLetter =
-            numberToLetter(result);
+            numberToLetter(
+                result
+            );
 
 
         table += `
 
             <tr>
 
-                <td>${character}</td>
+                <td>
+                    ${character}
+                </td>
 
-                <td>${c}</td>
+                <td>
+                    ${c}
+                </td>
 
-                <td>${keyLetter}</td>
+                <td>
+                    ${keyLetter}
+                </td>
 
-                <td>${k}</td>
+                <td>
+                    ${k}
+                </td>
 
                 <td>
                     (${c} - ${k} + 26)
                     mod 26 = ${result}
                 </td>
 
-                <td>${resultLetter}</td>
+                <td>
+                    ${resultLetter}
+                </td>
 
             </tr>
 
@@ -650,121 +1010,190 @@ function displayDecryptionSteps(
     }
 
 
-    table += "</table>";
+    table += `
+
+        </table>
+
+    `;
 
 
-    container.innerHTML = table;
+    container.innerHTML =
+        table;
 
 }
 
 
 
-/* ========================================
-   CLEAR ENCRYPTION CARD
-======================================== */
+/* =========================================
+   CLEAR ENCRYPTION
+========================================= */
 
 function clearEncryption() {
 
-    document.getElementById("plaintext").value = "";
+    document
+        .getElementById(
+            "plaintext"
+        )
+        .value = "";
 
-    document.getElementById("encryptKey").value = "";
 
-    document.getElementById("ciphertextOutput").value = "";
+    document
+        .getElementById(
+            "encryptKey"
+        )
+        .value = "";
 
-    document.getElementById("encryptError").textContent = "";
 
-    document.getElementById("encryptionSteps").innerHTML = "";
+    document
+        .getElementById(
+            "ciphertextOutput"
+        )
+        .value = "";
 
-    document.getElementById("encryptReverseSection")
-        .style.display = "none";
+
+    document
+        .getElementById(
+            "encryptError"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "encryptionSteps"
+        )
+        .innerHTML = "";
+
+
+    document
+        .getElementById(
+            "encryptReverseSection"
+        )
+        .style
+        .display = "none";
 
 }
 
 
 
-/* ========================================
-   CLEAR DECRYPTION CARD
-======================================== */
+/* =========================================
+   CLEAR DECRYPTION
+========================================= */
 
 function clearDecryption() {
 
-    document.getElementById("ciphertext").value = "";
+    document
+        .getElementById(
+            "ciphertext"
+        )
+        .value = "";
 
-    document.getElementById("decryptKey").value = "";
 
-    document.getElementById("plaintextOutput").value = "";
+    document
+        .getElementById(
+            "decryptKey"
+        )
+        .value = "";
 
-    document.getElementById("decryptError").textContent = "";
 
-    document.getElementById("decryptionSteps").innerHTML = "";
+    document
+        .getElementById(
+            "plaintextOutput"
+        )
+        .value = "";
 
-    document.getElementById("decryptReverseSection")
-        .style.display = "none";
+
+    document
+        .getElementById(
+            "decryptError"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "decryptionSteps"
+        )
+        .innerHTML = "";
+
+
+    document
+        .getElementById(
+            "decryptReverseSection"
+        )
+        .style
+        .display = "none";
 
 }
 
-function clearKeyReuse() {
-
-    document.getElementById("message1").value = "";
-
-    document.getElementById("message2").value = "";
-
-    document.getElementById("reuseKey").value = "";
-
-    document.getElementById("reuseCipher1").value = "";
-
-    document.getElementById("reuseCipher2").value = "";
-
-    document.getElementById("reuseError").textContent = "";
-
-    document.getElementById("reuseExplanation").innerHTML = "";
-}
 
 
-
-/* ========================================
-   TEST CASES
-======================================== */
+/* =========================================
+   TEST CASE DATA
+========================================= */
 
 const testCases = [
 
     {
-        plaintext: "HELLO",
-        key: "KEY",
-        ciphertext: "RIJVS"
+        plaintext:
+            "HELLO",
+
+        key:
+            "KEY",
+
+        ciphertext:
+            "RIJVS"
     },
 
-    {
-        plaintext: "COMPUTER",
-        key: "ABC",
-        ciphertext: "CPOPVVES"
-    },
 
     {
-        plaintext: "SECURITY",
-        key: "LOCK",
-        ciphertext: "DSEECWVI"
+        plaintext:
+            "COMPUTER",
+
+        key:
+            "ABC",
+
+        ciphertext:
+            "CPOPVVES"
+    },
+
+
+    {
+        plaintext:
+            "SECURITY",
+
+        key:
+            "LOCK",
+
+        ciphertext:
+            "DSEECWVI"
     }
 
 ];
 
 
 
-/* ========================================
+/* =========================================
    ENCRYPTION TESTS
-======================================== */
+========================================= */
 
 function runEncryptionTests() {
 
     const container =
-        document.getElementById("encryptionTests");
+        document
+            .getElementById(
+                "encryptionTests"
+            );
 
 
     container.innerHTML = "";
 
 
     testCases.forEach(
-        function(test, index) {
+        function(
+            test,
+            index
+        ) {
 
             const programOutput =
                 vigenereEncrypt(
@@ -774,7 +1203,9 @@ function runEncryptionTests() {
 
 
             const passed =
-                programOutput === test.ciphertext;
+                programOutput
+                ===
+                test.ciphertext;
 
 
             container.innerHTML += `
@@ -810,10 +1241,21 @@ function runEncryptionTests() {
                             ${programOutput}
                         </p>
 
-                        <p class="${passed ? "pass" : "fail"}">
+                        <p
+                            class="${
+                                passed
+                                    ? "pass"
+                                    : "fail"
+                            }"
+                        >
 
                             Result:
-                            ${passed ? "PASS ✓" : "FAIL ✗"}
+
+                            ${
+                                passed
+                                    ? "PASS ✓"
+                                    : "FAIL ✗"
+                            }
 
                         </p>
 
@@ -830,21 +1272,27 @@ function runEncryptionTests() {
 
 
 
-/* ========================================
+/* =========================================
    DECRYPTION TESTS
-======================================== */
+========================================= */
 
 function runDecryptionTests() {
 
     const container =
-        document.getElementById("decryptionTests");
+        document
+            .getElementById(
+                "decryptionTests"
+            );
 
 
     container.innerHTML = "";
 
 
     testCases.forEach(
-        function(test, index) {
+        function(
+            test,
+            index
+        ) {
 
             const programOutput =
                 vigenereDecrypt(
@@ -854,7 +1302,9 @@ function runDecryptionTests() {
 
 
             const passed =
-                programOutput === test.plaintext;
+                programOutput
+                ===
+                test.plaintext;
 
 
             container.innerHTML += `
@@ -890,10 +1340,21 @@ function runDecryptionTests() {
                             ${programOutput}
                         </p>
 
-                        <p class="${passed ? "pass" : "fail"}">
+                        <p
+                            class="${
+                                passed
+                                    ? "pass"
+                                    : "fail"
+                            }"
+                        >
 
                             Result:
-                            ${passed ? "PASS ✓" : "FAIL ✗"}
+
+                            ${
+                                passed
+                                    ? "PASS ✓"
+                                    : "FAIL ✗"
+                            }
 
                         </p>
 
@@ -910,32 +1371,66 @@ function runDecryptionTests() {
 
 
 
-/* ========================================
-   KEY REUSE SECURITY DEMONSTRATION
-======================================== */
+/* =========================================
+   KEY REUSE DEMONSTRATION
+========================================= */
 
 function demonstrateKeyReuse() {
 
     const message1 =
-        document.getElementById("message1").value.trim();
+        document
+            .getElementById(
+                "message1"
+            )
+            .value
+            .trim();
+
 
     const message2 =
-        document.getElementById("message2").value.trim();
+        document
+            .getElementById(
+                "message2"
+            )
+            .value
+            .trim();
+
 
     const key =
-        document.getElementById("reuseKey").value.trim();
+        document
+            .getElementById(
+                "reuseKey"
+            )
+            .value
+            .trim();
+
 
     const error =
-        document.getElementById("reuseError");
+        document
+            .getElementById(
+                "reuseError"
+            );
+
 
     const cipher1Output =
-        document.getElementById("reuseCipher1");
+        document
+            .getElementById(
+                "reuseCipher1"
+            );
+
 
     const cipher2Output =
-        document.getElementById("reuseCipher2");
+        document
+            .getElementById(
+                "reuseCipher2"
+            );
+
 
     const explanation =
-        document.getElementById("reuseExplanation");
+        document
+            .getElementById(
+                "reuseExplanation"
+            );
+
 
 
     error.textContent = "";
@@ -947,7 +1442,10 @@ function demonstrateKeyReuse() {
     explanation.innerHTML = "";
 
 
-    /* Validation */
+
+    /* =====================================
+       VALIDATION
+    ====================================== */
 
     if (
         message1 === ""
@@ -997,13 +1495,17 @@ function demonstrateKeyReuse() {
     }
 
 
-    /* Encrypt both messages using the same key */
+
+    /* =====================================
+       ENCRYPT BOTH WITH SAME KEY
+    ====================================== */
 
     const ciphertext1 =
         vigenereEncrypt(
             message1,
             key
         );
+
 
     const ciphertext2 =
         vigenereEncrypt(
@@ -1015,9 +1517,15 @@ function demonstrateKeyReuse() {
     cipher1Output.value =
         ciphertext1;
 
+
     cipher2Output.value =
         ciphertext2;
 
+
+
+    /* =====================================
+       REPEATED KEY
+    ====================================== */
 
     const repeatedKey1 =
         buildRepeatedKey(
@@ -1025,11 +1533,13 @@ function demonstrateKeyReuse() {
             key
         );
 
+
     const repeatedKey2 =
         buildRepeatedKey(
             message2,
             key
         );
+
 
 
     explanation.innerHTML = `
@@ -1042,7 +1552,9 @@ function demonstrateKeyReuse() {
 
         ${repeatedKey1}
 
+
         <br><br>
+
 
         <strong>
             Repeated Key for Message 2:
@@ -1052,7 +1564,9 @@ function demonstrateKeyReuse() {
 
         ${repeatedKey2}
 
+
         <br><br>
+
 
         <strong>
             What does this demonstrate?
@@ -1060,18 +1574,21 @@ function demonstrateKeyReuse() {
 
         <br>
 
-        Both messages were encrypted using the same key.
+        Both messages were encrypted using
+        the same key.
 
-        Since the Vigenère Cipher repeats the key,
-        the same key letters are used again at the same
-        positions.
+        Since the Vigenère Cipher repeats
+        the key, the same key letters are
+        reused at the same positions.
 
-        If several ciphertexts use the same key,
-        repeated patterns and relationships can become
-        easier to analyze.
+        If several ciphertexts use the same
+        key, repeated patterns and
+        relationships may become easier
+        to analyze.
 
-        This is why repeatedly reusing the same key
-        weakens the security of the Vigenère Cipher.
+        Therefore, repeatedly reusing the
+        same Vigenère key weakens the
+        security of the cipher.
 
     `;
 
@@ -1079,15 +1596,78 @@ function demonstrateKeyReuse() {
 
 
 
-/* ========================================
+/* =========================================
+   CLEAR SECURITY DEMONSTRATION
+========================================= */
+
+function clearKeyReuse() {
+
+    document
+        .getElementById(
+            "message1"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "message2"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "reuseKey"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "reuseCipher1"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "reuseCipher2"
+        )
+        .value = "";
+
+
+    document
+        .getElementById(
+            "reuseError"
+        )
+        .textContent = "";
+
+
+    document
+        .getElementById(
+            "reuseExplanation"
+        )
+        .innerHTML = "";
+
+}
+
+
+
+/* =========================================
    BUILD REPEATED KEY
-======================================== */
+========================================= */
 
-function buildRepeatedKey(message, key) {
+function buildRepeatedKey(
+    message,
+    key
+) {
 
-    message = message.toUpperCase();
+    message =
+        message.toUpperCase();
 
-    key = key.toUpperCase();
+    key =
+        key.toUpperCase();
 
 
     let repeatedKey = "";
@@ -1095,12 +1675,25 @@ function buildRepeatedKey(message, key) {
     let keyIndex = 0;
 
 
-    for (let i = 0; i < message.length; i++) {
+    for (
+        let i = 0;
+        i < message.length;
+        i++
+    ) {
 
-        if (/[A-Z]/.test(message[i])) {
+        if (
+            /[A-Z]/.test(
+                message[i]
+            )
+        ) {
 
             repeatedKey +=
-                key[keyIndex % key.length];
+                key[
+                    keyIndex
+                    %
+                    key.length
+                ];
+
 
             keyIndex++;
 
@@ -1108,7 +1701,8 @@ function buildRepeatedKey(message, key) {
 
         else {
 
-            repeatedKey += message[i];
+            repeatedKey +=
+                message[i];
 
         }
 
@@ -1121,21 +1715,41 @@ function buildRepeatedKey(message, key) {
 
 
 
-/* ========================================
+/* =========================================
    PAGE LOAD
-======================================== */
+========================================= */
 
-window.onload = function() {
-
-    document.getElementById("encryptReverseSection")
-        .style.display = "none";
-
-    document.getElementById("decryptReverseSection")
-        .style.display = "none";
+window.onload =
+    function() {
 
 
-    runEncryptionTests();
+        /*
+            Hide reverse buttons initially.
+        */
 
-    runDecryptionTests();
+        document
+            .getElementById(
+                "encryptReverseSection"
+            )
+            .style
+            .display = "none";
 
-};
+
+        document
+            .getElementById(
+                "decryptReverseSection"
+            )
+            .style
+            .display = "none";
+
+
+
+        /*
+            Automatically show test cases.
+        */
+
+        runEncryptionTests();
+
+        runDecryptionTests();
+
+    };
